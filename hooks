@@ -1,0 +1,43 @@
+import React, { useState, useEffect, useRef } from 'react';
+
+function App() {
+  // State to store the quote
+  const [quote, setQuote] = useState('');
+
+  // Ref to the button element
+  const buttonRef = useRef();
+
+  // useEffect Hook to fetch a random quote when the component mounts
+  useEffect(() => {
+    fetch('https://api.quotable.io/random')
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(data.content);
+      });
+  }, []); // Empty dependency array ensures this effect runs once when the component mounts
+
+  // Function to fetch and display a new random quote
+  const getNewQuote = () => {
+    fetch('https://api.quotable.io/random')
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(data.content);
+      });
+  };
+
+  // Function to focus on the button element using the ref
+  const focusButton = () => {
+    buttonRef.current.focus();
+  };
+
+  return (
+    <div>
+      <h1>Random Quote Generator</h1>
+      <p>{quote}</p>
+      <button onClick={getNewQuote}>Get New Quote</button>
+      <button onClick={focusButton}>Focus on Button</button>
+    </div>
+  );
+}
+
+export default App;

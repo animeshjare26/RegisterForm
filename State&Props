@@ -1,0 +1,47 @@
+//change the app.js entirely with this code and then npm start
+
+import React, { Component } from 'react';
+import './App.css';
+
+// Child component that uses props
+class DisplayMessage extends Component {
+  render() {
+    return (
+      <div>
+        <p>{this.props.message}</p>
+      </div>
+    );
+  }
+}
+
+// Parent component that uses state
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: 'Hello, React!', // Initial message in the state
+    };
+  }
+
+  changeMessage = () => {
+    this.setState({
+      message: 'State and Props are fundamental concepts in React!',
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>State and Props Demo</h1>
+        
+        {/* Child component using props */}
+        <DisplayMessage message={this.state.message} />
+
+        {/* Button to change the message using state */}
+        <button onClick={this.changeMessage}>Change Message</button>
+      </div>
+    );
+  }
+}
+
+export default App;
